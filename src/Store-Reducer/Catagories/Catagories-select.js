@@ -25,3 +25,8 @@ export const selectCatagoriesArray = createSelector(
       return acc;
     }, {})
 );
+
+export const selecIsLoading = createSelector(
+  [selectCatagories],
+  (catagoriesSlice) => catagoriesSlice.isLoading
+);
