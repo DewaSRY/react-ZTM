@@ -1,11 +1,10 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { selectCurrentUser } from "../Store-Reducer/User-contex/User-select";
 import { ReactComponent as CrwnLogo } from "../Assets/crown.svg";
 import CartIcon from "../Component/Shope/Cart-Icon";
 import CartDropDown from "../Component/Shope/Cart-DropDown";
 import { Outlet, Link } from "react-router-dom";
-
-import { signOut_User } from "../Utils/Firebase";
+import { signOutStart } from "../Store-Reducer/User-contex/User-actton";
 
 import { selectCarOpen } from "../Store-Reducer/Cart/Cart-select";
 
@@ -18,18 +17,19 @@ function SignInLink() {
     </Link>
   );
 }
-function SignOutLink() {
+function SignOutLink({ onSignOut }) {
   return (
-    <span className="nav-link" onClick={signOut_User}>
+    <span className="nav-link" onClick={onSignOut}>
       SIGN OUT
     </span>
   );
 }
 
 export default function Navigation() {
+  const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
   const isCartOpen = useSelector(selectCarOpen);
-  // const { isCartOpen } = useContext(CartContext);
+  const SignOutHeandler = () => dispatch(signOutStart());
 
   return (
     <>
@@ -43,7 +43,11 @@ export default function Navigation() {
           <Link className="nav-link" to="shop">
             Shop
           </Link>
-          {currentUser ? <SignOutLink /> : <SignInLink />}
+          {currentUser ? (
+            <SignOutLink onSignOut={SignOutHeandler} />
+          ) : (
+            <SignInLink />
+          )}
           <CartIcon />
         </div>
         {isCartOpen && <CartDropDown />}

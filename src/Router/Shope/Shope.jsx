@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { fetchCategoriesStartAsync } from "../../Store-Reducer/Catagories/Catagories-action";
+import { fetchCategoriesStart } from "../../Store-Reducer/Catagories/Catagories-action";
 
 import { Routes, Route } from "react-router-dom";
 import Catagories from "./Catagories-preview";
@@ -9,7 +9,7 @@ import "./Shope.scss";
 export default function Shope() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchCategoriesStartAsync());
+    dispatch(fetchCategoriesStart());
   }, [dispatch]);
   return (
     <Routes>

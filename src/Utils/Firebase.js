@@ -56,7 +56,7 @@ export const create_UserDocumentFromAuth = async (
       console.log("error creaate user ", err);
     }
   }
-  return userDocRef;
+  return userSnapShot;
 };
 //----------create new product to firestore--------
 export const create_ProductDocumentToFirebase = async (AllProduct) => {
@@ -106,11 +106,8 @@ export const get_CatagoriesAndDocument_m2 = async () => {
   const q = query(collectionRef);
   const quertSnapShot = await getDocs(q);
   return quertSnapShot.docs.map((docSnapshot) => docSnapshot.data());
-  // const catagoryMap = quertSnapShot.docs.reduce((acc, docSnapShot) => {
-  //   const { title, items } = docSnapShot.data();
-  //   acc[title.toLowerCase()] = items;
-  //   return acc;
-  // }, {});
+  // const catagoryMap = quertSnapShot.docs
+
   // return catagoryMap;
 };
 
@@ -140,3 +137,17 @@ export const signOut_User = async () => await signOut(auth);
 // ===
 export const onAuth_StateChangedListener = (callback) =>
   onAuthStateChanged(auth, callback);
+// =======
+
+export const get_CurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
+};

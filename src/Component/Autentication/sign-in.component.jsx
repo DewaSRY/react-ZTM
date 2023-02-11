@@ -1,11 +1,11 @@
 //
 import Button from "../../Ui/Button-ui";
 import FormInput from "../../Ui/Form-input";
+import { useDispatch } from "react-redux";
 import {
-  signIn_WithAuthEmailAndPassword,
-  signIn_WithGooglePopup,
-  create_UserDocumentFromAuth,
-} from "../../Utils/Firebase";
+  googleSignInStart,
+  emailSignInStart,
+} from "../../Store-Reducer/User-contex/User-actton";
 import { useState } from "react";
 import "./sign-form.style.scss";
 
@@ -13,35 +13,28 @@ const defaultFormFields = {
   email: "",
   password: "",
 };
-
 export default function SingINForm() {
+  const dispatch = useDispatch();
   const [formField, setFormField] = useState(defaultFormFields);
   const { email, password } = formField;
+
+  async function LogGoogleUser() {
+    dispatch(googleSignInStart());
+  }
+  async function submitHeandler(event) {
+    event.preventDefault();
+    try {
+      dispatch(emailSignInStart(email, password));
+      setFormField(defaultFormFields);
+    } catch (error) {
+      console.log("some things was wrong", error);
+    }
+  }
   const heandelChange = (event) => {
     const { name, value } = event.target;
     setFormField({ ...formField, [name]: value });
   };
 
-  async function LogGoogleUser() {
-    const { user } = await signIn_WithGooglePopup();
-    await create_UserDocumentFromAuth(user);
-  }
-  async function submitHeandler(event) {
-    event.preventDefault();
-    try {
-      await signIn_WithAuthEmailAndPassword(email, password);
-      setFormField(defaultFormFields);
-    } catch (error) {
-      switch (error.code) {
-        case "auth/wrong-password":
-          return alert("incorrect password");
-        case "auth/user-not-found":
-          return alert("Email not found ");
-        default:
-          console.log("some things was wrong", error);
-      }
-    }
-  }
   return (
     <div className="form-container ">
       <h2>Log In Here</h2>

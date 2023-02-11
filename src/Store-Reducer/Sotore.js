@@ -3,23 +3,16 @@ import { persistStore, persistReducer } from "redux-persist";
 import logger from "redux-logger";
 import storage from "redux-persist/lib/storage";
 import { RootReducer } from "./Root-reducer";
-import thunk from "redux-thunk";
-// const loggerMiddleware = (store) => (next) => (action) => {
-//   if (!action.type) {
-//     return next(action);
-//   }
-
-//   console.log("type: ", action.type);
-//   console.log("payload: ", action.payload);
-//   console.log("currentState: ", store.getState());
-//   next(action);
-//   console.log("next state: ", store.getState());
-// };
+import { RootSaga } from "./Root-saga";
+// import thunk from "redux-thunk";
+import createSagaMiddleware from "redux-saga";
+const sagaMiddleware = createSagaMiddleware();
 
 const middleWares = [
-  process.env.NODE_env === "development" && logger,
-  thunk,
+  process.env.NODE_env !== "production" && logger,
+  sagaMiddleware,
 ].filter(Boolean);
+
 const composeEnhancer =
   (process.env.NODE_ENV !== "production" &&
     window &&
@@ -41,5 +34,5 @@ export const store = createStore(
   undefined,
   composedEnhancers
 );
-
+sagaMiddleware.run(RootSaga);
 export const persistor = persistStore(store);
