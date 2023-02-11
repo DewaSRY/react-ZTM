@@ -100,6 +100,19 @@ export const get_CatagoriesAndDocument = async () => {
   }, {});
   return catagoryMap;
 };
+//----------get new collection product to firestore--------
+export const get_CatagoriesAndDocument_m2 = async () => {
+  const collectionRef = collection(db, "Catagories");
+  const q = query(collectionRef);
+  const quertSnapShot = await getDocs(q);
+  return quertSnapShot.docs.map((docSnapshot) => docSnapshot.data());
+  // const catagoryMap = quertSnapShot.docs.reduce((acc, docSnapShot) => {
+  //   const { title, items } = docSnapShot.data();
+  //   acc[title.toLowerCase()] = items;
+  //   return acc;
+  // }, {});
+  // return catagoryMap;
+};
 
 // --------------------auth----------------------------------------------------------------------
 const provider = new GoogleAuthProvider();

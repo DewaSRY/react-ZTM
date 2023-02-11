@@ -1,18 +1,20 @@
 import { useParams } from "react-router-dom";
-import { useContext, useState, useEffect } from "react";
-import { CatagoriesContext } from "../Store-contex/Catagories.context";
-import ProductCard from "../Component/Shope/Products";
+import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { selectCatagoriesArray } from "../../Store-Reducer/Catagories/Catagories-select";
+import ProductCard from "../../Component/Shope/Products";
 import "./Catagorie.scss";
 
 export default function Catagory() {
-  const { cataGoriesMap } = useContext(CatagoriesContext);
+  const catagories = useSelector(selectCatagoriesArray);
+
   const { category } = useParams();
-  const [products, setProducts] = useState(cataGoriesMap[category]);
+  const [products, setProducts] = useState(catagories[category]);
 
   useEffect(() => {
-    const product = cataGoriesMap[category];
+    const product = catagories[category];
     setProducts(product);
-  }, [category, cataGoriesMap]);
+  }, [category, catagories]);
   return (
     <>
       <h2 className="category-title">{category.toUpperCase()}</h2>

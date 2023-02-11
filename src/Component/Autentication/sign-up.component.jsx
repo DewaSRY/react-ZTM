@@ -71,6 +71,7 @@ export default function SingUpForm() {
           onChange={heandelChange}
           name="password"
           value={password}
+          autoComplete="on"
         />
         <FormInput
           label="Confirm Password"
@@ -79,6 +80,7 @@ export default function SingUpForm() {
           onChange={heandelChange}
           name="confirmPassword"
           value={confirmPassword}
+          autoComplete="on"
         />
         <Button type="submit">Submit</Button>
       </form>

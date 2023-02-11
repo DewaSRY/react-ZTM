@@ -1,5 +1,5 @@
-import { CATAGORIES } from "../Assets/CATAGORIES";
-import DirectoriesItem from "../Component/HomeDirectory/Directory-item";
+import { CATAGORIES } from "../../Assets/CATAGORIES";
+import DirectoriesItem from "../../Component/HomeDirectory/Directory-item";
 import "./HomeDirectory.styles.scss";
 
 export default function HomeDirectory() {

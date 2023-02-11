@@ -1,17 +1,25 @@
 import { ReactComponent as ShoppingIcon } from "../../Assets/Cart.svg";
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { CartContext } from "../../Store-contex/Cart.context";
+
+import { useSelector, useDispatch } from "react-redux";
+import { setIsCartOpen } from "../../Store-Reducer/Cart/Cart-action";
+import {
+  selectCarOpen,
+  selecctCartCount,
+} from "../../Store-Reducer/Cart/Cart-select";
 import "./Cart-Icon.scss";
 
 export default function CartIcon() {
-  const { isCartOpen, setIsCartOpen, cartCount } = useContext(CartContext);
+  const dispatch = useDispatch();
+  const isCartOpen = useSelector(selectCarOpen);
+  const cartCount = useSelector(selecctCartCount);
+
   const navigate = useNavigate();
   function CartHeandler() {
     if (!cartCount) {
       return navigate("/checkout");
     }
-    setIsCartOpen(!isCartOpen);
+    dispatch(setIsCartOpen(!isCartOpen));
   }
   return (
     <div className="cart-icon-container" onClick={CartHeandler}>

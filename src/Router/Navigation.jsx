@@ -1,11 +1,14 @@
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../Store-Reducer/User-contex/User-select";
 import { ReactComponent as CrwnLogo } from "../Assets/crown.svg";
 import CartIcon from "../Component/Shope/Cart-Icon";
 import CartDropDown from "../Component/Shope/Cart-DropDown";
 import { Outlet, Link } from "react-router-dom";
-import { useContext } from "react";
-import { UserContext } from "../Store-contex/User.contex";
-import { CartContext } from "../Store-contex/Cart.context";
+
 import { signOut_User } from "../Utils/Firebase";
+
+import { selectCarOpen } from "../Store-Reducer/Cart/Cart-select";
+
 import "./Navigation.style.scss";
 
 function SignInLink() {
@@ -24,8 +27,9 @@ function SignOutLink() {
 }
 
 export default function Navigation() {
-  const { currentUser } = useContext(UserContext);
-  const { isCartOpen } = useContext(CartContext);
+  const currentUser = useSelector(selectCurrentUser);
+  const isCartOpen = useSelector(selectCarOpen);
+  // const { isCartOpen } = useContext(CartContext);
 
   return (
     <>
