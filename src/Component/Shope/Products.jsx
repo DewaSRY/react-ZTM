@@ -1,7 +1,7 @@
 import Button from "../../Ui/Button-ui";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCartItems } from "../../Store-Reducer/Cart/Cart-select";
-import { addItemToCart } from "../../Store-Reducer/Cart/Cart-action";
+import { addItemToCart } from "../../Store-Reducer/Cart/Cart-reducer";
 import "./Products.scss";
 
 export default function ProductCard({ product }) {

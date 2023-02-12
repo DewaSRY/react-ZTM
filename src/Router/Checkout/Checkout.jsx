@@ -5,7 +5,7 @@ import {
   selectCartItems,
   selecctCartTotal,
 } from "../../Store-Reducer/Cart/Cart-select";
-import { setIsCartOpen } from "../../Store-Reducer/Cart/Cart-action";
+import { setIsCartOpen } from "../../Store-Reducer/Cart/Cart-reducer";
 import "./Checkout.scss";
 
 const HEADER_BLOCK = ["Product", "Description", "Quantity", "Price", "Remove"];

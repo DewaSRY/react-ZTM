@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setCatagoriesArray } from "../../Store-Reducer/Catagories/Catagories-action";
+import { setCategories } from "../../Store-Reducer/Catagories/Catagories-reducer";
 import {
   //  get_CatagoriesAndDocument,
   get_CatagoriesAndDocument_m2,
@@ -15,7 +15,7 @@ export default function Shope() {
     const getCatagoriesArray = async () => {
       const catagoriesArray = await get_CatagoriesAndDocument_m2();
       console.log(catagoriesArray);
-      dispatch(setCatagoriesArray(catagoriesArray));
+      dispatch(setCategories(catagoriesArray));
     };
     getCatagoriesArray();
   }, [dispatch]);

@@ -2,7 +2,7 @@ import { ReactComponent as ShoppingIcon } from "../../Assets/Cart.svg";
 import { useNavigate } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
-import { setIsCartOpen } from "../../Store-Reducer/Cart/Cart-action";
+import { setIsCartOpen } from "../../Store-Reducer/Cart/Cart-reducer";
 import {
   selectCarOpen,
   selecctCartCount,

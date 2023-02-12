@@ -75,7 +75,7 @@ export const create_ProductDocumentToFirebase = async (AllProduct) => {
       console.log("error creaate user ", err);
     }
   }
-  return productDocRef;
+  return userSnapShot;
 };
 //----------create new collection product to firestore--------
 export const add_CollectionAndDocument = async (collectionke, obbjectToAdd) => {

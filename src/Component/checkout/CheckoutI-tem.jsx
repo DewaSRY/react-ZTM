@@ -2,9 +2,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectCartItems } from "../../Store-Reducer/Cart/Cart-select";
 import {
   addItemToCart,
-  removeItemfromCart,
-  clearItemfromCart,
-} from "../../Store-Reducer/Cart/Cart-action";
+  removeItemFromCart,
+  clearItemFromCart,
+} from "../../Store-Reducer/Cart/Cart-reducer";
 
 import "./CheckoutI-tem.scss";
 
@@ -15,10 +15,10 @@ export default function CheckoutItem({ cartItem }) {
   const { name, imageUrl, price, quantity } = cartItem;
 
   const clearItemHandler = () =>
-    dispatch(clearItemfromCart(cartItems, cartItem));
+    dispatch(clearItemFromCart(cartItems, cartItem));
   const addItemHandler = () => dispatch(addItemToCart(cartItems, cartItem));
   const removeItemHandler = () =>
-    dispatch(removeItemfromCart(cartItems, cartItem));
+    dispatch(removeItemFromCart(cartItems, cartItem));
 
   const IcontButton = ({ value, onHeandler, className }) => {
     return (
