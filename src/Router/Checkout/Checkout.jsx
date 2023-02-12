@@ -1,5 +1,5 @@
 import CheckoutItem from "../../Component/Checkout/CheckoutI-tem";
-
+import PatmentForm from "../../Component/Payment-form/Payment-form";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectCartItems,
@@ -30,6 +30,7 @@ export default function Checkout() {
       {cartItems.length > 0 ? <CheckOutItem /> : <MassageToShope />}
 
       <div className="total">TOTAL: ${cartTotal}</div>
+      <PatmentForm />
     </div>
   );
 }
