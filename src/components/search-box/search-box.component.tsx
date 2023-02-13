@@ -1,6 +1,14 @@
 import './search-box.styles.css';
 
-const SearchBox = ({ className, placeholder, onChangeHandler }) => (
+type SerchBoxProps={
+  className:string;
+  placeholder?:string;
+  onChangeHandler:(a:string)=>void
+}
+
+
+
+const SearchBox = ({ className, placeholder, onChangeHandler }:SerchBoxProps) => (
   <input
     className={`search-box ${className}`}
     type='search'
